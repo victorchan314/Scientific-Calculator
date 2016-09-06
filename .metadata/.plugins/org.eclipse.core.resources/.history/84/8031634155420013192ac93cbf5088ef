@@ -1,0 +1,61 @@
+// EmptyFrame.java
+//Victor Chan, Manik Khurana
+package EmptyFrame;
+import java.awt.LayoutManager;
+import java.awt.Toolkit;
+import java.awt.event.*;
+import java.awt.*;
+
+import javax.swing.*;
+class EmptyFrame extends JFrame {
+  public EmptyFrame() {
+  }
+
+  public static void main(String[] args) {
+    JFrame Calculator = new EmptyFrame();
+    Calculator.setTitle("Calculator");
+    Calculator.setSize(750,750);
+    Calculator.setLocationRelativeTo(null);
+    Calculator.setDefaultCloseOperation(EXIT_ON_CLOSE);
+   
+    JPanel panel = new JPanel();    // define panel
+    Calculator.add(panel); // add panel to frame
+    //panel.setLayout(new BorderLayout(10,10)); // null is default
+    panel.setLayout(null);  // Absolute positioning via setBounds()
+    //panel.setLayout(new LayoutManager());
+    
+    final JLabel l = new JLabel("label");   // define label
+    l.setBounds(15,5,250,25);
+    //l.setBackgroundColor(Color.red);
+    //l.getContentPane().setBackgroundColor(Color.red);
+    panel.add(l);
+    //l.setText(" new label");
+    
+    final JTextArea area =new JTextArea();   // define text area
+    area.setLineWrap(true);
+    area.setWrapStyleWord(true);
+    area.setBounds(15,35,250,75);
+    //area.setBackgroundColor(Color.gray);
+    panel.add(area);
+    
+    JButton quitButton = new JButton("Quit");   // define quit button
+    quitButton.setBounds(210, 140, 70, 25); //position and size of the button x,y,width,height
+    panel.add(quitButton);
+    //
+    JButton updateButton = new JButton("Update");  // define update button
+    updateButton.setBounds(110, 140, 90, 25); //position and size of the button x,y,width,height
+    panel.add(updateButton);
+    Calculator.setVisible(true); // display frame
+    quitButton.addActionListener(new ActionListener() {// invoked when quit button pushed  
+        public void actionPerformed(ActionEvent event) {
+            System.exit(0);
+       }
+    });
+    updateButton.addActionListener(new ActionListener() {// invoked when update button pushed
+        public void actionPerformed(ActionEvent event) {
+        	String s=area.getText();
+        	l.setText(s);
+        }
+    });
+  }
+}

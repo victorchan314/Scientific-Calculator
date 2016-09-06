@@ -1,0 +1,55 @@
+// EmptyFrame.java
+//Victor Chan, Manik Khurana
+package EmptyFrame;
+import java.awt.LayoutManager;
+import java.awt.Toolkit;
+import java.awt.event.*;
+import java.awt.*;
+
+import javax.swing.*;
+class EmptyFrame extends JFrame{
+  public EmptyFrame(){
+  }
+
+  public static void main(String[] args){
+    JFrame Calculator = new EmptyFrame();
+    Calculator.setTitle("Calculator");
+    Calculator.setSize(750,750);
+    Calculator.setLocationRelativeTo(null);
+    Calculator.setDefaultCloseOperation(EXIT_ON_CLOSE);
+   
+    JPanel panel = new JPanel();
+    Calculator.add(panel);
+    panel.setLayout(null); 
+    
+    final JLabel Answer = new JLabel("Answer");
+    Answer.setBounds(15,5,250,25);
+    panel.add(Answer);
+    
+    final JTextArea area =new JTextArea();
+    area.setLineWrap(true);
+    area.setWrapStyleWord(true);
+    area.setBounds(15,35,250,75);
+    panel.add(area);
+    
+    JButton quitButton = new JButton("Quit");
+    quitButton.setBounds(210, 140, 70, 25);
+    panel.add(quitButton);
+
+    JButton updateButton = new JButton("Update");
+    updateButton.setBounds(110, 140, 90, 25);
+    panel.add(updateButton);
+    Calculator.setVisible(true);
+    quitButton.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            System.exit(0);
+       }
+    });
+    updateButton.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+        	String s=area.getText();
+        	Answer.setText(s);
+        }
+    });
+  }
+}
